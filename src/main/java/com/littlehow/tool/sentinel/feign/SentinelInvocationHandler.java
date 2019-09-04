@@ -131,16 +131,16 @@ public class SentinelInvocationHandler implements InvocationHandler {
                 return fallbackMethodMap.get(method)
                         .invoke(fallbackFactory.create(ex), args);
             } catch (IllegalAccessException e) {
-                return GlobalFallbackService.degradeFallback();
+                return GlobalFallbackService.degradeFallback(ex);
             } catch (InvocationTargetException e) {
                 if (ExceptionHandler.traceException(e.getTargetException())) {
-                    return GlobalFallbackService.degradeFallback();
+                    return GlobalFallbackService.degradeFallback(ex);
                 } else {
                     throw e.getTargetException();
                 }
             }
         } else {
-            return GlobalFallbackService.degradeFallback();
+            return GlobalFallbackService.degradeFallback(ex);
         }
     }
 

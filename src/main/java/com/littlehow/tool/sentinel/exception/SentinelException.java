@@ -6,7 +6,7 @@ import lombok.Getter;
 public class SentinelException extends RuntimeException {
     private String code;
     public SentinelException(String message, String code) {
-        super(message);
+        super(message, null, true, false);
         this.code = code;
     }
 }
